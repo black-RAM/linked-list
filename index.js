@@ -84,6 +84,38 @@ class LinkedList {
     }
   }
 
+  insertAt(value, index) {
+    if(index > this.size() || index < 0) return
+    const current = this.at(index)
+    const previous = this.at(index - 1)
+    const newNode = new Node(value)
+    if(previous) {
+      previous.next = newNode
+    } else {
+      this.start = newNode
+    }
+    newNode.next = current
+  }
+  
+  removeAt(index) {
+    if(index > this.size() || index < 0) return
+
+    const before = this.at(index - 1)
+    const after = this.at(index + 1)
+
+    if(!before){
+      this.start = after
+      return
+    }
+
+    if(!after) {
+      this.pop()
+      return
+    }
+
+    before.next = after
+  }
+
   toString() {
     let stringified = ""
     let current = this.start
